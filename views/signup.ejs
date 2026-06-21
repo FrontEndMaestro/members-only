@@ -6,7 +6,7 @@
     <title>Sign Up</title>
   </head>
   <body>
-    <form action="/signup" method="post">
+    <form action="/auth/signup" method="post">
         
          <% if (locals.message) {%>
          <div><%=locals.message%></div>
@@ -34,5 +34,7 @@
       <input type="password" name="confirmPass" id="confirm-password" />
       <button type="submit">Sign Up</button>
     </form>
+
+    <h3>Already have an account? <a href="/login">Login</a></h3>
   </body>
 </html>
