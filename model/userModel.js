@@ -8,7 +8,7 @@ async function addUser(userData) {
         userData.firstName,
         userData.lastName,
         userData.email,
-        userData.password,
+        userData.hashedPassword,
       ],
     );
   } else {
@@ -20,9 +20,16 @@ async function findUser(userMail) {
   const { rows } = await pool.query("SELECT * FROM users WHERE email=($1)", [
     userMail,
   ]);
+  if (!rows.length) {
+    return null;
+  } else  return rows[0];
+}
+
+async function findUserById(id) {
+  const { rows } = await pool.query("SELECT * FROM users WHERE id=($1)", [id]);
   if (rows.length == 0) {
     return null;
   } else return rows[0];
 }
 
-module.exports = { addUser };
+module.exports = { addUser, findUser, findUserById };
