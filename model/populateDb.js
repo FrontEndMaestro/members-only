@@ -8,6 +8,7 @@ CREATE TABLE users (
     email VARCHAR(255),
     password VARCHAR(255),
     membership_status BOOL DEFAULT FALSE
+    isAdmin BOOL DEFAULT FALSE
 );
 
 CREATE TABLE messages (
