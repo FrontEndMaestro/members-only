@@ -11,9 +11,36 @@
         <% } %>
 
       <% if (locals.user) { %>  
-        <a href="">Create a new Message</a> 
-        <a href="/auth/logout">Logout</a> 
+        <a href="/message/create">Create a new Message</a> 
+        <a href="/auth/logout">Logout</a>
+        <% if (!locals.user.membership_status) { %>  
+        <a href="/member">Become a Member</a>  <% } %>
         <% } %>
+       
+        <ul>
+        <% if (locals.messages) { %>
+         <% messages.forEach(message=>{%>
+          <li>
+            <div class="text"><%= message.message %></div>
+           
+             <% if (locals.user) { %>
+             <% if(locals.user.membership_status) {%>
+               <span>
+             <%= message.time %>
+            </span>
+              <div class="author"><%= message.email %></div>
+
+          <% }%><% } %>
+          </li>
+
+        <% }) %>
+         <% } %>
+        
+       </ul>
+        <% if (!locals.user) { %>
+          <a href="/login">Login</a>
+          <a href="/">Signup</a>
+          <% }%>
     
     
   </body>
