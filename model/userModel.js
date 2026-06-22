@@ -22,7 +22,7 @@ async function findUser(userMail) {
   ]);
   if (!rows.length) {
     return null;
-  } else  return rows[0];
+  } else return rows[0];
 }
 
 async function findUserById(id) {
@@ -32,4 +32,10 @@ async function findUserById(id) {
   } else return rows[0];
 }
 
-module.exports = { addUser, findUser, findUserById };
+async function updateUserMembership(userId) {
+  await pool.query("UPDATE users SET membership_status=true WHERE id=($1)", [
+    userId,
+  ]);
+}
+
+module.exports = { addUser, findUser, findUserById, updateUserMembership };
