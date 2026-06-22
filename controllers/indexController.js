@@ -18,7 +18,6 @@ function postMember(req, res) {
 
 async function getHome(req, res) {
   const allMessages = await messageModel.getAllMessagesWithUser();
-  console.log(allMessages);
   if (req.isAuthenticated())
     res.render("index", { user: req.user, messages: allMessages });
   else {
@@ -27,7 +26,6 @@ async function getHome(req, res) {
 }
 
 function getLogin(req, res) {
-  console.log("get request for login function", req.session.messages);
   const error = req.session.messages || [];
   req.session.messages = [];
   res.render("login", { errorMessages: error });
