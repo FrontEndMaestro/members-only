@@ -15,7 +15,13 @@ async function postMessage(req, res) {
   req.body.time = `${time} ${date}`;
   req.body.userId = req.user.id;
   await messageModel.createMessage(req.body);
-  await indexController.getHome();
+  res.redirect("/home");
 }
 
-module.exports = { getMessage, postMessage };
+async function deleteMessage(req, res) {
+  let messageId = req.params.messageId;
+  await messageModel.deleteMessage(messageId);
+  res.redirect("/home");
+}
+
+module.exports = { getMessage, postMessage, deleteMessage };

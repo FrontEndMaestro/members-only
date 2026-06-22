@@ -14,4 +14,8 @@ async function getAllMessagesWithUser() {
   return result.rows;
 }
 
-module.exports = { createMessage, getAllMessagesWithUser };
+async function deleteMessage(messageId) {
+  pool.query("DELETE FROM messages WHERE id=($1)", [messageId]);
+}
+
+module.exports = { createMessage, getAllMessagesWithUser, deleteMessage };
