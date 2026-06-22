@@ -15,13 +15,13 @@ async function postMessage(req, res) {
   req.body.time = `${time} ${date}`;
   req.body.userId = req.user.id;
   await messageModel.createMessage(req.body);
-  res.redirect("/home");
+  res.redirect("/");
 }
 
 async function deleteMessage(req, res) {
   let messageId = req.params.messageId;
   await messageModel.deleteMessage(messageId);
-  res.redirect("/home");
+  res.redirect("/");
 }
 
 module.exports = { getMessage, postMessage, deleteMessage };

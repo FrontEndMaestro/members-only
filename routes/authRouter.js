@@ -7,7 +7,7 @@ authRouter.post("/signup", authController.postSignup);
 authRouter.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/home",
+    successRedirect: "/",
     failureRedirect: "/login",
     failureMessage: true,
   }),

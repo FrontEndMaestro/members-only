@@ -59,7 +59,7 @@ const postSignup = [
 function logOut(req, res) {
   req.logout(function (err) {
     if (err) return err;
-    res.redirect("/home");
+    res.redirect("/");
   });
 }
 
