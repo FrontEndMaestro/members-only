@@ -24,13 +24,19 @@
             <div class="text"><%= message.message %></div>
            
              <% if (locals.user) { %>
-             <% if(locals.user.membership_status) {%>
-               <span>
+             <% if(locals.user.membership_status || locals.user.isadmin) {%>
+               <span>2
              <%= message.time %>
             </span>
               <div class="author"><%= message.email %></div>
 
-          <% }%><% } %>
+              <% if(locals.user.isadmin) {%>
+                
+               <button class='delete' id='<%=message.id%>'>Delete</button>
+                
+                <%}%>
+          <% }%>
+          <% } %>
           </li>
 
         <% }) %>
@@ -44,4 +50,17 @@
     
     
   </body>
+
+  <script>
+    document.querySelectorAll(".delete").forEach(element=>{
+      element.addEventListener("click",async(event)=>{
+        let messageId=event.target.id
+      
+      await fetch(`/message/delete/${messageId}`,{
+        method:'DELETE'
+      })
+      window.location.reload();
+    })
+  })
+  </script>
 </html>
