@@ -36,8 +36,9 @@ const postSignup = [
         .status(400)
         .render("signup", { errors: errors.array(), formData: req.body });
     }
-    const { firstName, lastName, email, password, confirmPass } =
+    let { firstName, lastName, email, password, confirmPass } =
       matchedData(req);
+    let isAdmin = req.body.isAdmin == "on" ? true : false;
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const result = await userModel.addUser({
@@ -45,6 +46,7 @@ const postSignup = [
       lastName,
       email,
       hashedPassword,
+      isAdmin,
     });
     if (result !== undefined) {
       res.status(400).render("signup", { formData: req.body, message: result });
