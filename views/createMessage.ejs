@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create a Message</title>
+  </head>
+  <body>
+    <h1>Create Message</h1>
+    <form action="/message/create" method="post">
+       <% if (locals.errorMessages) {%>
+         <ul>
+            <% errorMessages.forEach(function(error) { %>
+                <li><%= error %></li>
+            <% }); %>
+         </ul>
+        <% } %>
+      <label for="message">Enter your message:</label>
+      <textarea name="message" id="message" rows="5"></textarea>
+      <button type="submit">Done</button>
+    </form>
+  </body>
+
+</html>
