@@ -3,12 +3,13 @@ async function addUser(userData) {
   const result = await findUser(userData.email);
   if (result == null) {
     await pool.query(
-      "INSERT INTO users(first_name,last_name,email,password) VALUES ($1,$2,$3,$4)",
+      "INSERT INTO users(first_name,last_name,email,password,isadmin) VALUES ($1,$2,$3,$4,$5)",
       [
         userData.firstName,
         userData.lastName,
         userData.email,
         userData.hashedPassword,
+        userData.isAdmin
       ],
     );
   } else {
