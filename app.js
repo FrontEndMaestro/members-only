@@ -11,6 +11,9 @@ const messageRouter = require("./routes/messageRouter");
 const { pool } = require("./model/dbConnection");
 const pgSession = require("connect-pg-simple")(session);
 
+const assetsPath = path.join(__dirname, "public");
+app.use(express.static(assetsPath));
+
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
@@ -30,7 +33,6 @@ app.use(
 );
 
 app.use(passport.session());
-
 
 app.use("/auth", authRouter);
 app.use("/", indexRouter);
