@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Become a Member</title>
+  </head>
+  <body>
+    <a href="/home">Back to Home</a>
+    <form action="/member" method="post">
+       <% if (locals.message) {%>
+         <ul>
+                <li><%= message %></li>
+         </ul>
+        <% } %>
+      <label for="secret">Enter secret phrase:</label>
+      <input type="password" name="secret" id="secret" />
+
+      <button type="submit">Become a Member</button>
+    </form>
+  </body>
+</html>
