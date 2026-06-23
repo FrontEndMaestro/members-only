@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/signup-styles.css">
   </head>
   <body>
+    <h1>Sign Up</h1>
     <form action="/auth/signup" method="post">
         
          <% if (locals.message) {%>
@@ -21,21 +22,25 @@
          </ul>
         <% } %>
        
+       <div class="wrapper">
+         <label for="f-name">First Name:
+             <input type="text" id="f-name" name="firstName"  value="<%- locals.formData?.firstName|| '' %>" required />
+         </label>
+   
+      <label for="l-name">Last Name:
+           <input type="text" id="l-name" name="lastName" value="<%- locals.formData?.lastName || '' %>"  required />
+      </label>
+       </div>
+     
+      <label for="email">Email:    <input type="email" name="email" id="email" value="<%- locals.formData?.email|| '' %>"  required /></label>
+   
+      <div class="wrapper">
+        <label for="password">Password:  <input type="password" name="password" id="password" /></label>
+      <label for="confirm-password">Confirm Password:  <input type="password" name="confirmPass" id="confirm-password" /></label>
+      </div>
+      
 
-      <label for="f-name">First Name:</label>
-      <input type="text" id="f-name" name="firstName"  value="<%- locals.formData?.firstName|| '' %>" required />
-      <label for="l-name">Last Name:</label>
-      <input type="text" id="l-name" name="lastName" value="<%- locals.formData?.lastName || '' %>"  required />
-      <label for="email">Email:</label>
-      <input type="email" name="email" id="email" value="<%- locals.formData?.email|| '' %>"  required />
-      <label for="password">Password:</label>
-      <input type="password" name="password" id="password" />
-
-      <label for="confirm-password">Confirm Password:</label>
-      <input type="password" name="confirmPass" id="confirm-password" />
-
-      <label for="isAdmin">Admin:</label>
-      <input type="checkbox" name="isAdmin" id="isAdmin">
+      <label for="isAdmin">Admin: <input type="checkbox" name="isAdmin" id="isAdmin"></label>
       <button type="submit">Sign Up</button>
     </form>
 
