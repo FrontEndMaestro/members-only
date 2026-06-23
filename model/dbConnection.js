@@ -1,7 +1,5 @@
 const { Pool } = require("pg");
-const { loadEnvFile } = require("process");
 
-loadEnvFile();
 const pool = new Pool({
   host: process.env.HOST,
   user: process.env.USERNAME,
