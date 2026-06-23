@@ -4,64 +4,82 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Index</title>
-    <link rel="stylesheet" href="/index-styles.css">
+    <link rel="stylesheet" href="/index-styles.css" />
   </head>
   <body>
-        <% if (locals.user) { %>
-          <h1>Welcome <%= `${user.first_name} ${user.last_name}` %> to the app</h1>
-        <% } %>
-
-      <% if (locals.user) { %>  
-        <a href="/message/create">Create a new Message</a> 
-        <a href="/auth/logout">Logout</a>
-        <% if (!locals.user.membership_status) { %>  
-        <a href="/member">Become a Member</a>  <% } %>
-        <% } %>
-       
-        <ul>
-        <% if (locals.messages) { %>
-         <% messages.forEach(message=>{%>
-          <li>
-            <div class="text"><%= message.message %></div>
-           
-             <% if (locals.user) { %>
-             <% if(locals.user.membership_status || locals.user.isadmin) {%>
-               <span>2
-             <%= message.time %>
-            </span>
-              <div class="author"><%= message.email %></div>
-
-              <% if(locals.user.isadmin) {%>
-                
-               <button class='delete' id='<%=message.id%>'>Delete</button>
-                
-                <%}%>
-          <% }%>
-          <% } %>
-          </li>
-
-        <% }) %>
-         <% } %>
-        
-       </ul>
-        <% if (!locals.user) { %>
+    <nav class="navbar">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M6.5 13.5h7v-1h-7zm0-3h11v-1h-11zm0-3h11v-1h-11zM3 20.077V4.616q0-.691.463-1.153T4.615 3h14.77q.69 0 1.152.463T21 4.616v10.769q0 .69-.463 1.153T19.385 17H6.077zM5.65 16h13.735q.23 0 .423-.192t.192-.423V4.615q0-.23-.192-.423T19.385 4H4.615q-.23 0-.423.192T4 4.615v13.03zM4 16V4z"/>
+      </svg>
+      
+      <% if (!locals.user) { %>
+        <div class="nav-wrapper">
           <a href="/login">Login</a>
           <a href="/signup">Signup</a>
-          <% }%>
-    
-    
+        </div>
+      <% } %>
+      
+      <% if (locals.user) { %>
+        <div class="user-heading">
+          <%= `${user.first_name} ${user.last_name}` %>
+        </div>
+        
+        
+          <div class="wrapper">
+             <% if (!locals.user.membership_status) { %> 
+            <a href="/member">Become a Member</a> <% } %>
+            <a href="/auth/logout">Logout</a>
+          </div>
+       
+        
+        
+      <% } %>
+    </nav>
+          
+    <% if (locals.user) { %>  
+      <a href="/message/create" class="create-message">Create a new Message</a> 
+    <% } %>
+          
+    <div class="messages-wrapper">
+      <h1>All Messages</h1>
+      <ul class="list">
+        <% if (locals.messages) { %>
+          <% messages.forEach(message => { %>
+            <li class="list-element">
+              <% if (locals.user) { %>
+                <% if(locals.user.membership_status || locals.user.isadmin) { %>
+                  <div class="wrapper">
+                    <div class="author"><%= message.email %></div>
+                    <span>
+                      <%= new Date(message.time).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }) %>
+                    </span>
+                  </div>
+                <% } %>
+              <% } %>
+              
+              <div class="text"><%= message.message %></div>
+              
+              <% if(locals.user && locals.user.isadmin) { %>
+                <button class="delete" id="<%= message.id %>">Delete</button>
+              <% } %>
+            </li>
+          <% }) %>
+        <% } %>
+      </ul>
+    </div>
   </body>
 
   <script>
-    document.querySelectorAll(".delete").forEach(element=>{
-      element.addEventListener("click",async(event)=>{
-        let messageId=event.target.id
-      
-      await fetch(`/message/delete/${messageId}`,{
-        method:'DELETE'
-      })
-      window.location.reload();
-    })
-  })
+    document.querySelectorAll(".delete").forEach(element => {
+      element.addEventListener("click", async (event) => {
+        let messageId = event.target.id;
+        
+        await fetch(`/message/delete/${messageId}`, {
+          method: 'DELETE'
+        });
+        
+        window.location.reload();
+      });
+    });
   </script>
 </html>
