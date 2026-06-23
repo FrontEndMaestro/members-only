@@ -42,6 +42,6 @@ app.use((error, req, res, next) => {
   console.log(error);
 });
 
-app.listen(3000, () => {
+app.listen(3000, "0.0.0.0", () => {
   console.log(`Server is listening at http://localhost:3000`);
 });
