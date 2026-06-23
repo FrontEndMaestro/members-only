@@ -1,0 +1,110 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+}
+
+h1 {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid black;
+  border-radius: 20px;
+  padding: 40px;
+  gap: 20px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+label[for="isAdmin"] {
+  flex-direction: row;
+  align-items: center;
+  width: auto;
+}
+
+input[type="checkbox"] {
+  margin: 0;
+  margin-left: 5px;
+}
+
+input {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+button {
+  margin-top: 20px;
+  width: fit-content;
+  padding: 10px 20px;
+  font-weight: 600;
+  border-radius: 20px;
+  background-color: black;
+  color: white;
+  align-self: center;
+  transition: all 0.2s ease-out;
+  cursor: pointer;
+  border: none;
+}
+
+button:hover {
+  transform: rotate(10deg);
+}
+
+.hidden {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+a {
+  text-decoration: underline;
+  color: black;
+  padding: 5px 10px;
+  border-radius: 10px;
+  transition: all 0.5s ease-in;
+}
+
+@media (max-width: 768px) {
+  form {
+    width: 90%;
+    padding: 25px 20px;
+  }
+
+  .wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+}
