@@ -9,13 +9,14 @@
   <body>
     <h1>Login</h1>
     <form action="/auth/login" method="post">
-       <% if (locals.errorMessages) {%>
-         <ul>
+       <% if (locals.errorMessages ) {%>
+         
             <% errorMessages.forEach(function(error) { %>
                 <li><%= error %></li>
             <% }); %>
-         </ul>
+         
         <% } %>
+  
       <label for="email">Enter your email:</label>
       <input type="email" name="email" id="email" required />
       <label for="password">Enter Password:</label>
